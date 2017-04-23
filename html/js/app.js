@@ -6,26 +6,29 @@ var pipelines = [
 		{url:"https://jsonplaceholder.typicode.com/posts/5", checkType:"singleFail"},
 	];
 
-function getAPI(url, checkType) {
+function checkResult(url, checkType, responseJSON) {
+	if (checkType === "poorHealth") {
+				document.getElementById('result').innerHTML += ("Poor Health Check: " + responseJSON.id + '<br>');
+	} else if (checkType === "singleFail") {
+				document.getElementById('result').innerHTML += ("Single Fail Check: " + responseJSON.id + '<br>');
+	}
+}
+
+function getJSON(url, checkType) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4) {
+		if (xhr.readyState === 4 && xhr.status === 200) {
 			var responseObject = JSON.parse(xhr.responseText)
-
-			if (checkType === "poorHealth") {
-				document.getElementById('result').innerHTML += ("Poor Health Check: " + responseObject.id + '<br>');
-			} else if (checkType === "singleFail") {
-				document.getElementById('result').innerHTML += ("Single Fail Check: " + responseObject.id + '<br>');
-			}
+			checkResult(url, checkType, responseObject);
 		}
 	};
 	xhr.open('GET', url);
 	xhr.send();
 }
 
-function checkHealth(updateHealthReport) {
+function checkHealth() {
 	for (var i=0; i<pipelines.length; i++) {
-		getAPI(pipelines[i].url,pipelines[i].checkType);
+		getJSON(pipelines[i].url,pipelines[i].checkType);
 	}	
 }
 
