@@ -1,10 +1,15 @@
-var pipelines = [
-		{url:"https://jsonplaceholder.typicode.com/posts/1", checkType:"poorHealth"},
-		{url:"https://jsonplaceholder.typicode.com/posts/2", checkType:"poorHealth"},
-		{url:"https://jsonplaceholder.typicode.com/posts/3", checkType:"singleFail"},
-		{url:"https://jsonplaceholder.typicode.com/posts/4", checkType:"singleFail"},
-		{url:"https://jsonplaceholder.typicode.com/posts/5", checkType:"singleFail"},
-	];
+function getPipelines() {
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			var responseObject = JSON.parse(xhr.responseText)
+			checkHealth(responseObject);
+		}
+	};
+	xhr.open('GET', 'pipelines.json');
+	xhr.send();
+
+}
 
 function checkResult(url, checkType, responseJSON) {
 	if (checkType === "poorHealth") {
@@ -14,7 +19,7 @@ function checkResult(url, checkType, responseJSON) {
 	}
 }
 
-function getJSON(url, checkType) {
+function getPipeline(url, checkType) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4 && xhr.status === 200) {
@@ -26,10 +31,11 @@ function getJSON(url, checkType) {
 	xhr.send();
 }
 
-function checkHealth() {
+function checkHealth(pipelines) {
+	console.log("Pipelines: " + pipelines);
 	for (var i=0; i<pipelines.length; i++) {
-		getJSON(pipelines[i].url,pipelines[i].checkType);
+		getPipeline(pipelines[i].url,pipelines[i].checkType);
 	}	
 }
 
-$.ready(checkHealth());
+$.ready(getPipelines());
