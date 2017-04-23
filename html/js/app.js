@@ -11,20 +11,24 @@ function getPipelines() {
 
 }
 
-function checkResult(url, checkType, responseJSON) {
-	if (checkType === "poorHealth") {
-				document.getElementById('result').innerHTML += ("Poor Health Check: " + responseJSON.id + '<br>');
-	} else if (checkType === "singleFail") {
-				document.getElementById('result').innerHTML += ("Single Fail Check: " + responseJSON.id + '<br>');
-	}
+function addResult(pipelineName, pipelineLeakiness) {
+	document.getElementById('results').innerHTML += ('<li class="result">' + pipelineLeakiness + '% leaky ' + pipelineName + '</li>');
 }
 
-function getPipeline(url, checkType) {
+function checkResult(pipelineName, responseJSON) {
+	pipelineLeakiness = 100 - responseJSON.id
+
+	if (pipelineLeakiness >= 80) {
+		addResult(pipelineName,pipelineLeakiness);
+	} 
+}
+
+function getPipeline(pipelineName, url) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4 && xhr.status === 200) {
 			var responseObject = JSON.parse(xhr.responseText)
-			checkResult(url, checkType, responseObject);
+			checkResult(pipelineName, responseObject);
 		}
 	};
 	xhr.open('GET', url);
@@ -34,7 +38,7 @@ function getPipeline(url, checkType) {
 function checkHealth(pipelines) {
 	console.log("Pipelines: " + pipelines);
 	for (var i=0; i<pipelines.length; i++) {
-		getPipeline(pipelines[i].url,pipelines[i].checkType);
+		getPipeline(pipelines[i].pipelineName,pipelines[i].url);
 	}	
 }
 
