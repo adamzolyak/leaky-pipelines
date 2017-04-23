@@ -1,0 +1,52 @@
+body {
+  background: white;
+}
+
+h1 {
+  font: 2em "Open Sans", courier;
+  text-align: center;
+  color: purple;
+  font-size: 48px; 
+  font-weight: bold;
+}
+
+.numpad {
+  display: block;
+  margin: auto;
+  padding: 20px;
+  width: 60%;
+}
+
+.block{
+  clear:both;
+  margin: 10px 10px 40px 10px;
+  padding: 10px;
+  width: 100%;
+  height: 50px;
+  display: inline-block;
+  float: left;
+}
+
+.font1 {
+  font: 2em "Open Sans", courier;
+  font-weight: bold;
+  text-align: left;
+  color: black;
+  font-size: 30px; 
+}
+
+.font2 {
+  font: 2em "Open Sans", courier;
+  font-weight: bold;
+  text-align: left;
+  color: black;
+  font-size: 40px; 
+}
+
+input[type=text] {
+    width: 100px;
+    padding: 12px 20px;
+    margin: 8px 0;
+}
+
+
