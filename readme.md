@@ -9,10 +9,6 @@ A simple dashboard to help identify unhealthy Jenkins pipelines and jobs.
 
 ## Testing
 
-1. run `docker-compose up -d --build` in a terminal
+1. run `sh test-up.sh` in a terminal
 
-Optionally remove flags as needed:
-`-d` detached mode
-`--build` rebuild images 
-
-2. test at `http://localhost:8080/your_page_here.html` in your browser
+2. test at `http://localhost:8080/` in your browser
