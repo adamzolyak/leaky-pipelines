@@ -14,6 +14,8 @@ A simple dashboard to help identify unhealthy Jenkins pipelines and jobs.
 
 ## Building and Pushing
 
+https://hub.docker.com/r/tinkurlab/leaky-pipes/
+
 1. `docker login`
-1. `docker build -t tinkurlab/leaky-pipes:latest .``
+1. `docker build -t tinkurlab/leaky-pipes:latest .`
 1. `docker push tinkurlab/leaky-pipes:latest`
