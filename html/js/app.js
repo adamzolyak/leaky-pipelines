@@ -12,14 +12,17 @@ function getPipelines() {
 }
 
 function addResult(pipelineName, pipelineLeakiness) {
-	document.getElementById('results').innerHTML += ('<li class="result">' + pipelineLeakiness + '% leaky ' + pipelineName + '</li>');
+	document.getElementById('results').innerHTML += (`<li class="result">${pipelineName} is ${pipelineLeakiness}% leaky</li>`);
 }
 
 function checkResult(pipelineName, responseJSON) {
-	pipelineLeakiness = 100 - responseJSON.id
+	pipelineLeakiness = 100 - responseJSON.healthReport[0].score;
 
 	if (pipelineLeakiness >= 80) {
 		addResult(pipelineName,pipelineLeakiness);
+		$("#noresults").hide();
+		$("body").css('background-color', '#d9534f');
+
 	} 
 }
 
@@ -39,7 +42,7 @@ function checkHealth(pipelines) {
 	console.log("Pipelines: " + pipelines);
 	for (var i=0; i<pipelines.length; i++) {
 		getPipeline(pipelines[i].pipelineName,pipelines[i].url);
-	}	
+	}			
 }
 
 $.ready(getPipelines());

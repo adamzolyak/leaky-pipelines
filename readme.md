@@ -9,6 +9,11 @@ A simple dashboard to help identify unhealthy Jenkins pipelines and jobs.
 
 ## Testing
 
-1. run `sh test-up.sh` in a terminal
+1. `sh test-up.sh`
+1. test at `http://localhost:6162/` in your browser
 
-2. test at `http://localhost:8080/` in your browser
+## Building and Pushing
+
+1. `docker login`
+1. `docker build -t tinkurlab/leaky-pipes:latest .``
+1. `docker push tinkurlab/leaky-pipes:latest`

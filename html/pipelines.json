@@ -1,5 +1,5 @@
 [
-	{"pipelineName":"Pipeline A", "url":"https://jsonplaceholder.typicode.com/posts/1"},
-	{"pipelineName":"Pipeline B", "url":"https://jsonplaceholder.typicode.com/posts/2"},
-	{"pipelineName":"Pipeline C", "url":"https://jsonplaceholder.typicode.com/posts/3"}
+	{"pipelineName":"Pipeline 1", "url":"/test/1.json"},
+	{"pipelineName":"Pipeline 2", "url":"/test/2.json"},
+	{"pipelineName":"Pipeline 3", "url":"/test/3.json"}
 ]

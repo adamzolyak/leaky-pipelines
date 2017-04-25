@@ -1,3 +1,3 @@
 #!/bin/bash
 docker-compose build --no-cache
-docker-compose up
+docker-compose -f docker-compose.dev.yml up
