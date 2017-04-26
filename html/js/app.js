@@ -1,27 +1,27 @@
-function addResult(pipelineName, pipelineLeakiness) {
+var addResultToPage = function (pipelineName, pipelineLeakiness) {
 	document.getElementById('results').innerHTML += (`<li class="result">${pipelineName} is ${pipelineLeakiness}% leaky</li>`);
 }
 
-var checkResult = function (pipelineName, healthReportScore) {
+var evaluateLeakinessOfPipeline = function (pipelineName, healthReportScore) {
 	pipelineLeakiness = 100 - healthReportScore;
 
 	if (pipelineLeakiness >= 80) {
-		addResult(pipelineName,pipelineLeakiness);
+		addResultToPage(pipelineName,pipelineLeakiness);
 		$("#noresults").hide();
 		$("body").css('background-color', '#d9534f');
 
 	} 
 }
 
-var getPipeline = function (index, pipeline) {
+var getPipelineHealthReportScore = function (index, pipeline) {
 	$.getJSON(pipeline.url,function (response) {
-		checkResult(pipeline.pipelineName, response.healthReport[0].score);
+		evaluateLeakinessOfPipeline(pipeline.pipelineName, response.healthReport[0].score);
 	})
 	
 }
 
-var checkAllPipelineHealth = function (pipelines) {
-	$.each(pipelines, getPipeline)		
+var checkHealthAllPipelines = function (pipelines) {
+	$.each(pipelines, getPipelineHealthReportScore)		
 }
 
-$.ready($.getJSON("pipelines.json",checkAllPipelineHealth));
+$.ready($.getJSON("pipelines.json",checkHealthAllPipelines));
